@@ -57,7 +57,8 @@ const UpdateDisplayPicture = ({ userData, getUserData, editDP, setEditDP }) =>
     return(
         <Dialog open={editDP} onOpenChange={setEditDP}>
         <DialogTrigger asChild>
-            <Image className='cursor-pointer md:h-40 w:h-32 md:w-40 bg-white object-cover w-32 shadow-md aspect-square object-top rounded-full' src={userData.imageURL ?? defaultDP} width={100} height={100} alt='user'/>
+            <Image className='cursor-pointer md:h-40 w:h-32 md:w-40 bg-white object-cover w-32 shadow-md aspect-square object-top rounded-full' 
+            src={userData?.imageURL ? userData?.imageURL : defaultDP} width={100} height={100} alt='user'/>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px] space-y-0.5">
             <DialogHeader>
