@@ -1,0 +1,58 @@
+.container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.main
+{
+    width: 100%;
+    padding: 30px 10vw 0;
+}
+
+
+@media screen and (max-width: 450px)
+{
+    .main
+    {
+        padding: 20px;
+    }
+}
+
+/* .support
+{
+    height:50px;
+    width: fit-content;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius:50%;
+    cursor: pointer;
+    z-index: 1;
+    background-color: var(--primary-element);
+    padding: 10px;
+}
+
+.chatWrapper
+{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.75);
+}
+
+.chat
+{
+    width: 375px;
+    position: absolute;
+    right: 20px;
+    bottom: 80px;
+    background-color: var(--primary-bg);
+    border: 1px solid rgb(34, 34, 34);
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+} */
