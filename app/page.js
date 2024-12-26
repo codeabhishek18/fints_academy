@@ -221,9 +221,9 @@ const Home = () =>
                 </Marquee>
             </div>
 
-            <div className='lg:px-[10vw] px-[5vw] text-white relative py-12 flex flex-col gap-4' style={{backgroundColor: 'var(--primary-color)'}}>            
+            <div className='lg:px-[10vw] px-[5vw] text-white relative py-12 xl:pb-[15vh] md:pb-[20vh] pb-[15vh] flex flex-col gap-4' style={{backgroundColor: 'var(--primary-color)'}}>            
                 <h1 style={{color:'var(--action-color)'}} className='font-bold lg:text-5xl sm:text-3xl text-2xl'>Why CAMS and CGSS ?</h1>
-                <div className='flex lg:flex-row flex-col gap-6 lg:justify-between items-center mt-4'>
+                <div className='flex xl:flex-row flex-col gap-6 xl:justify-between justify-center xl:items-center items-stretch mt-4'>
                     <div className='mt-4 flex flex-col gap-2'>
                     {info.map((point, index)=>
                     (
@@ -233,7 +233,7 @@ const Home = () =>
                         </div>
                     ))}
                     </div>
-                    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2'>
+                    <div className='grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-2 gap-2'>
                     {opportunities.map((data)=>
                     (
                         <Card key={data.header} className='flex flex-col gap-2 p-4 justify-center items-center rounded'>
@@ -243,21 +243,7 @@ const Home = () =>
                     ))}
                     </div>
                 </div>
-            </div>
-
-            <div className='lg:px-[10vw] space-y-8 px-[5vw] bg-white py-12'>
-            <h1 className='font-bold w-full text-left lg:text-5xl sm:text-3xl text-2xl' style={{color: 'var(--primary-bg)'}}>About Us</h1>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                {heroData.map((data, index)=>
-                (
-                    <Card className='flex flex-col gap-2 p-8' key={data.id}>
-                        <Image className='lg:h-14 h-10 w-fit text-sm md:text-base' src={data.image} alt='icon'/>
-                        <h1 className='md:text-lg text-base font-bold mt-4'>{data.header}</h1>
-                        <p>{data.detail}</p>
-                    </Card>
-                ))}
-                </div>    
-                <div className='w-[100%] flex flex-col gap-8 rounded-xl lg:p-12 md:p-8 p-4 bg-white shadow-md' style={{backgroundColor: 'var(--primary-color)'}}>
+                <div className='lg:w-[80%] w-[90%] absolute md:bottom-[-10vh] bottom-[-5vh] left-[50%] translate-x-[-50%] flex flex-col gap-8 rounded-xl lg:p-12 md:p-8 p-4 bg-white shadow-md' style={{backgroundColor: 'var(--primary-bg)'}}>
                 <div className='grid grid-cols-3 lg:gap-6 md:gap-4 gap-2'>
                 {numbers.map((data)=>
                 (
@@ -269,6 +255,21 @@ const Home = () =>
                 </div>
                 {/* <p className='font-bold text-4xl text-center' style={{color: 'var(--action-color)'}}>Join us to achieve more</p> */}
                 </div>
+            </div>
+
+            <div className='lg:px-[10vw] space-y-8 px-[5vw] md:pt-[15vh] pt-[10vh] bg-white py-12'>
+            {/* <h1 className='font-bold w-full text-left lg:text-5xl sm:text-3xl text-2xl' style={{color: 'var(--primary-bg)'}}>About Us</h1> */}
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                {heroData.map((data, index)=>
+                (
+                    <Card className='flex flex-col gap-2 p-8' key={data.id}>
+                        <Image className='lg:h-14 h-10 w-fit text-sm md:text-base' src={data.image} alt='icon'/>
+                        <h1 className='md:text-lg text-base font-bold mt-4'>{data.header}</h1>
+                        <p>{data.detail}</p>
+                    </Card>
+                ))}
+                </div>    
+                
                 
             </div>
 

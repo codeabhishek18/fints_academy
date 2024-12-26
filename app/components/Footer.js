@@ -11,7 +11,7 @@ const Footer = () =>
 
     return(
         <div className='flex px-[10vw] gap-6 flex-col justify-center py-24 text-white md:text-base text-sm' style={{backgroundColor: 'var(--primary-color)'}}>
-            <div className='flex justify-between mb-6'>
+            <div className='flex flex-col items-center sm:flex-row gap-2 sm:justify-between mb-6'>
                 <Image className='h-12 w-fit' src={logo} alt='icon'/>
                 
                 <div className='flex gap-2 items-center'>
