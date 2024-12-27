@@ -1,7 +1,9 @@
 import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model";
 import { Enrollment } from "@/models/enrollment.model";
+import { Feedback } from "@/models/feedback.model";
 import { Lecture } from "@/models/lecture.model";
+import { User } from "@/models/user.model";
 
 class courseService
 {
@@ -54,7 +56,10 @@ class courseService
     {
         try
         {
-            const course = await Course.findOne({id}).populate({path: 'lectures', model: Lecture}).populate({path: 'batches', model: Batch, populate: {path: 'enrollments', model: Enrollment}})
+            const course = await Course.findOne({id})
+            .populate({path: 'lectures', model: Lecture})
+            .populate({path: 'batches', model: Batch, populate: {path: 'enrollments', model: Enrollment}})
+            .populate({path:'feedbacks',  model:Feedback, populate: {path: 'user', model:User}})
             if(!course)
                 throw new Error('Course not found')
             return course

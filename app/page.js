@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { faqData } from '@/utility/faqData'
 import chat from '@/assets/chat.png'
 import close from '@/assets/close.png'
-import timeline from '@/assets/timeline.jpg'
+import call from '@/assets/call.png'
 import live from '@/assets/live.png'
 import material from '@/assets/material.png'
 import record from '@/assets/record.png'
@@ -17,9 +17,16 @@ import profile2 from '@/assets/profile2.jpg'
 import profile3 from '@/assets/profile1.jpeg'
 
 import globe from '@/assets/globe.png'
-import growth from '@/assets/growth.png'
-import industry from '@/assets/industry.png'
-import skill from '@/assets/skill.png'
+import compliance from '@/assets/compliance.png'
+import career from '@/assets/career.png'
+import goal from '@/assets/goal.png'
+
+import organisation from '@/assets/organisation.png'
+import prevention from '@/assets/prevention.png'
+import risk from '@/assets/risk.png'
+import updated from '@/assets/updated.png'
+import success from '@/assets/success.png'
+
 import Image from 'next/image'
 import HeroSection from './components/Herosection'
 import Accordian from './components/Accordian'
@@ -38,6 +45,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import RequestForm from './components/RequestForm'
 
 const heroData =
 [
@@ -74,34 +82,51 @@ const heroData =
     {
         id: 6,
         image: placement,
-        header: 'Placement Assistance',
-        detail: 'Access to job openings through our curated job portal'
+        header: 'Referrals',
+        detail: 'Benefit from job referrals and career guidance through our strong alumni network'
     }
 ]
 
-const opportunities =
-[
-    {
-        id: 1,
-        header: 'Global Demand',
-        image: globe
-    },
-    {
-        id: 2,
-        header: 'Career Growth',
-        image: growth
-    },
-    {
-        id: 3,
-        header: 'Industry Adoption',
-        image: industry
-    },
-    {
-        id: 4,
-        header: 'Skill Confidence',
-        image: skill
-    }
-]
+const roadmap = [
+  {
+    weeks: "1–2",
+    focus: "Build the Foundation",
+    description:
+      "Understand the basics of compliance, AML, and sanctions frameworks. Study key principles, terminologies, and regulatory bodies like FATF, OFAC, and EU laws.",
+  },
+  {
+    weeks: "3–4",
+    focus: "Deep Dive into Regulations and Risks",
+    description:
+      "Explore AML laws, sanctions compliance programs, risk assessment strategies, money laundering typologies, and sanctions evasion tactics through detailed study.",
+  },
+  {
+    weeks: "5–6",
+    focus: "Practical Application and Testing",
+    description:
+      "Engage in case studies, quizzes, and scenarios to apply knowledge. Practice compliance measures, risk mitigation strategies, and take initial mock tests.",
+  },
+  {
+    weeks: "7–8",
+    focus: "Revision and Final Prep",
+    description:
+      "Revisit key concepts, create summaries, and take final revision mock tests. Focus on exam format, time management, and solidifying weak areas.",
+  },
+  {
+    weeks: "9–12",
+    focus: "Initial Mock Tests and Analysis",
+    description:
+      "Take one full-length mock test per week for both CAMS and CGSS. Analyze performance, identify weak areas, and revise key topics to build confidence.",
+  },
+  {
+    weeks: "13–16",
+    focus: "Advanced Mock Tests and Refinement",
+    description:
+      "Take two full-length mock tests per week for each certification. Focus on high-weightage topics, refine time management, and ensure consistent performance.",
+  },
+];
+
+
 
 const numbers =
 [
@@ -126,7 +151,7 @@ const feedbacks = [
     {
       name: "John Doe",
       image: profile1,
-      feedback: "The training program was highly informative and well-structured. The mock tests and curated materials made exam preparation much easier. The instructors were knowledgeable and provided excellent support throughout. Highly recommended for CAMS and CGSS aspirants!",
+      feedback: "The training program was well-structured. The mock tests and curated materials made exam preparation much easier. The instructors were knowledgeable and provided excellent support throughout. Highly recommended for CAMS and CGSS aspirants!",
     },
     {
       name: "Jane Smith",
@@ -141,7 +166,7 @@ const feedbacks = [
     {
       name: "John Doe",
       image: profile1,
-      feedback: "The training program was highly informative and well-structured. The mock tests and curated materials made exam preparation much easier. The instructors were knowledgeable and provided excellent support throughout. Highly recommended for CAMS and CGSS aspirants!",
+      feedback: "The training program was well-structured. The mock tests and curated materials made exam preparation much easier. The instructors were knowledgeable and provided excellent support throughout. Highly recommended for CAMS and CGSS aspirants!",
     },
     {
       name: "Jane Smith",
@@ -156,7 +181,7 @@ const feedbacks = [
     {
       name: "John Doe",
       image: profile1,
-      feedback: "The training program was highly informative and well-structured. The mock tests and curated materials made exam preparation much easier. The instructors were knowledgeable and provided excellent support throughout. Highly recommended for CAMS and CGSS aspirants!",
+      feedback: "The training program was well-structured. The mock tests and curated materials made exam preparation much easier. The instructors were knowledgeable and provided excellent support throughout. Highly recommended for CAMS and CGSS aspirants!",
     },
     {
       name: "Jane Smith",
@@ -170,33 +195,56 @@ const feedbacks = [
     },
   ];
 
-  const info =
-  [
+  const whyCamsAndCgss = [
     {
-      reason: "Increasing regulatory scrutiny demands professionals skilled in AML and sanctions compliance."
+      id: 1,
+      icon: compliance, // Replace with actual icons or paths to images
+      header: "Regulatory Compliance",
+      description: "Increasing regulatory scrutiny demands professionals skilled in AML and sanctions compliance.",
     },
     {
-      reason: "Certifications open high-paying career opportunities in compliance and risk management."
+      id: 2,
+      icon: career,
+      header: "Career Opportunities",
+      description: "Certifications open high-paying career opportunities in compliance and risk management.",
     },
     {
-      reason: "They provide tools to identify and prevent financial crimes like money laundering and fraud."
+      id: 3,
+      icon: prevention,
+      header: "Financial Crime Prevention",
+      description: "They provide tools to identify and prevent financial crimes like money laundering and fraud.",
     },
     {
-      reason: "Keep professionals updated with evolving financial crime techniques and sanctions frameworks."
+      id: 4,
+      icon: updated,
+      header: "Stay Updated",
+      description: "Keep professionals updated with evolving financial crime techniques and sanctions frameworks.",
     },
     {
-      reason: "CAMS and CGSS are globally recognized, enhancing professional credibility."
+      id: 5,
+      icon: globe,
+      header: "Global Recognition",
+      description: "CAMS and CGSS are globally recognized, enhancing professional credibility.",
     },
+    // {
+    //   id: 6,
+    //   icon: organisation,
+    //   header: "Organizational Compliance",
+    //   description: "Help organizations avoid fines, sanctions, and reputational damage by ensuring compliance.",
+    // },
+    // {
+    //   id: 7,
+    //   icon: risk,
+    //   header: "Risk Mitigation",
+    //   description: "Build expertise in assessing and mitigating financial and sanctions-related risks.",
+    // },
     {
-      reason: "Help organizations avoid fines, sanctions, and reputational damage by ensuring compliance."
+      id: 8,
+      icon: goal,
+      header: "Professional Commitment",
+      description: "Demonstrate commitment to compliance and readiness for specialized challenges.",
     },
-    {
-      reason: "Build expertise in assessing and mitigating financial and sanctions-related risks."
-    },
-    {
-      reason: "Demonstrate commitment to compliance and readiness for specialized challenges."
-    }
-  ]
+  ];
   
 
 const Home = () =>
@@ -204,156 +252,117 @@ const Home = () =>
     const [ showFaq, setShowFaq ] = useState(0);
 
     return(
-        <div className='md:text-base text-sm md:leading-9 leading-8'>
+        <div className='md:text-base text-sm md:leading-7 leading-5'>
             <HeroSection />
             
-            <div className='bg-white flex flex-col gap-6 items-center pb-12'>
-                <h1 className='text-center font-bold lg:text-5xl sm:text-3xl text-2xl mt-[20vh]' style={{color: 'var(--primary-color)'}}>Recent Graduates</h1>
+            <div className='bg-white space-y-4 text-center items-center py-12'>
+            <h1 className='font-semibold text-center text-2xl'>CAMS Graduates, December</h1>
                 <Marquee className="justify-center overflow-hidden [--duration:60s] [--gap:2rem] w-[100%]">
                 {feedbacks.map((data, index)=>
                 (
                     <div className='transition-all flex flex-col items-center p-2 rounded' key={index}>
-                        <Image className='lg:h-60 md:h-48 h-24 w-fit aspect-square object-cover rounded-full' src={data.image} alt='feedback'/>
-                        <h1 className='lg:text-xl text-md font-bold mt-2'>{data.name}</h1>
-                        <p className='lg:text-md text-sm text-gray-400'>India</p>
+                        <Image className='lg:h-48 md:h-36 h-24 w-fit aspect-square object-cover rounded-full' src={data.image} alt='feedback'/>
+                        <h1 className='lg:text-lg text-base font-semibold mt-2'>{data.name}</h1>
+                        <p className='lg:text-base text-sm text-gray-400'>India</p>
                     </div>
                 ))}
                 </Marquee>
+                <h1 className='lg:px-[10vw] px-[5vw] lg:text-4xl md:text-2xl text-xl  leading-snug font-semibold text-orange-700'>Join Our Growing Network of Successful Graduates</h1>
+                <p className='lg:px-[10vw] px-[5vw]  text-gray-400'>Explore the achievements of our recent graduates and see how our program is shaping the future of AML and compliance professionals.</p>
             </div>
 
-            <div className='lg:px-[10vw] px-[5vw] text-white relative py-12 xl:pb-[15vh] md:pb-[20vh] pb-[15vh] flex flex-col gap-4' style={{backgroundColor: 'var(--primary-color)'}}>            
-                <h1 style={{color:'var(--action-color)'}} className='font-bold lg:text-5xl sm:text-3xl text-2xl'>Why CAMS and CGSS ?</h1>
-                <div className='flex xl:flex-row flex-col gap-6 xl:justify-between justify-center xl:items-center items-stretch mt-4'>
-                    <div className='mt-4 flex flex-col gap-2'>
-                    {info.map((point, index)=>
+            <div className='lg:px-[10vw] px-[5vw] space-y-12 text-white relative py-12 flex flex-col gap-4' style={{backgroundColor: 'var(--primary-color)'}}>            
+                <h1 className='font-semibold text-center text-2xl'>Why it matters</h1>
+                <div className='grid lg:grid-cols-2 grid-cols-1 gap-4'>
+                    {whyCamsAndCgss.map((data, index)=>
                     (
-                        <div className='flex gap-4 lg:items-center items-start' key={index}>
-                            <span className='lg:p-1.5 p-1 lg:mt-0 mt-3 h-fit rounded-full' style={{backgroundColor: 'var(--action-color)'}}></span>
-                            <p>{point.reason}</p>
-                        </div>
+                      <div className='space-y-4 p-8 rounded-xl shadow-2xl' key={data.id}  style={{backgroundColor: 'var(--primary-bg)'}}>
+                       <Image className='lg:h-12 h-10 w-fit text-sm md:text-base' src={data.icon} alt='icon'/>
+                        <h1 className='font-semibold'>{data.header}</h1>
+                        <p className='text-gray-400'>{data.description}</p>
+                      </div>
                     ))}
-                    </div>
-                    <div className='grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-2 gap-2'>
-                    {opportunities.map((data)=>
-                    (
-                        <Card key={data.header} className='flex flex-col gap-2 p-4 justify-center items-center rounded'>
-                            <Image className='md:h-12 h-8 w-fit' src={data.image} alt='icon'/>
-                            <p className='font-semibold text-center leading-6 md:text-base text-sm text-black'>{data.header}</p>
-                        </Card>
-                    ))}
-                    </div>
-                </div>
-                <div className='lg:w-[80%] w-[90%] absolute md:bottom-[-10vh] bottom-[-5vh] left-[50%] translate-x-[-50%] flex flex-col gap-8 rounded-xl lg:p-12 md:p-8 p-4 bg-white shadow-md' style={{backgroundColor: 'var(--primary-bg)'}}>
-                <div className='grid grid-cols-3 lg:gap-6 md:gap-4 gap-2'>
-                {numbers.map((data)=>
-                (
-                    <div className='flex flex-col items-center gap-2' key={data.id}>
-                        <h1 className='font-bold lg:text-4xl md:text-3xl sm:text-2xl text-xl' style={{color: 'var(--action-color)'}}>{data.number}</h1>
-                        <p className='lg:text-xl md:text-lg text-xs text-white'>{data.title}</p>
-                    </div>
-                ))}
-                </div>
-                {/* <p className='font-bold text-4xl text-center' style={{color: 'var(--action-color)'}}>Join us to achieve more</p> */}
-                </div>
+                  </div>
             </div>
 
-            <div className='lg:px-[10vw] space-y-8 px-[5vw] md:pt-[15vh] pt-[10vh] bg-white py-12'>
-            {/* <h1 className='font-bold w-full text-left lg:text-5xl sm:text-3xl text-2xl' style={{color: 'var(--primary-bg)'}}>About Us</h1> */}
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <div className='lg:px-[10vw] space-y-16 px-[5vw] bg-white py-12'>
+            <h1 className='font-semibold w-full text-center text-2xl mb-8'>Course benefits</h1>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                 {heroData.map((data, index)=>
                 (
-                    <Card className='flex flex-col gap-2 p-8' key={data.id}>
-                        <Image className='lg:h-14 h-10 w-fit text-sm md:text-base' src={data.image} alt='icon'/>
-                        <h1 className='md:text-lg text-base font-bold mt-4'>{data.header}</h1>
-                        <p>{data.detail}</p>
-                    </Card>
-                ))}
-                </div>    
-                
-                
-            </div>
-
-            <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'  style={{backgroundColor: 'var(--primary-color)'}}>
-                <h1 className='px-[5vw] lg:px-[10vw] font-bold lg:text-5xl sm:text-3xl text-2xl py-12' style={{color: 'var(--action-color)'}}>Roadmap</h1>
-                <Image src={timeline} alt='timeline'/>
-            </div>
-
-            {/* <div className='lg:px-[10vw] px-[5vw] bg-white flex flex-col py-12'>
-                <h1 className='font-bold w-full text-left mb-8 lg:text-5xl sm:text-3xl text-2xl' style={{color: 'var(--primary-bg)'}}>Testimonials</h1>
-                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4'>
-                {feedbacks.map((feed, index)=>
-                (
-                    <div key={index} className='shadow-md bg-gray-100 p-6 rounded flex flex-col gap-2 hover:shadow-xl'>
-                        <Image className='lg:h-14 md:h-10 text-sm md:text-base w-fit object-cover rounded-full' src={feed.image} alt='user'/>
-                        <h1 className='font-bold text-xl'>{feed.name}</h1>
-                        <p>{feed.feedback}</p>
+                    <div className='flex flex-col gap-2' key={data.id}>
+                        <Image className='lg:h-12 h-10 w-fit text-sm md:text-base' src={data.image} alt='icon'/>
+                        <h1 className='md:text-lg text-base font-semibold mt-4'>{data.header}</h1>
+                        <p className='text-gray-400'>{data.detail}</p>
                     </div>
                 ))}
+                </div>    
+            </div>
+
+            <div className='lg:px-[10vw] px-[5vw] space-y-12 text-white relative py-12 flex flex-col gap-4' style={{backgroundColor: 'var(--primary-color)'}}>            
+                <div className='flex lg:flex-row flex-col lg:items-start items-center gap-8'>
+                  <div className='lg:w-[50%] space-y-4 lg:sticky top-[5%]'>
+                    <p className='font-semibold text-2xl lg:text-start text-center'>Course timeline</p>
+                    <Image className='lg:h-28 md:h-20 h-16 w-fit' src={success} alt='icon'/>
+                    <h1 className='lg:text-4xl md:text-2xl text-xl  leading-snug font-semibold text-lime-200'>Your Step-by-Step Guide to CAMS & CGSS Success</h1>
+                    <p className='text-gray-400'>Master the essentials, refine your skills, and excel with a structured 16-week roadmap for certification excellence.</p>
+                  </div>
+                  <div className='lg:w-[50%] space-y-4'>
+                    {roadmap.map((data, index)=>
+                    (
+                      <div className='space-y-4 p-8 rounded-xl shadow-2xl' key={index}style={{backgroundColor: 'var(--primary-bg)'}}>
+                       {/* <Image className='lg:h-12 h-10 w-fit text-sm md:text-base' src={data.icon} alt='icon'/> */}
+                        <h1 className='font-semibold'>Week {data.weeks}</h1>
+                        <p className='font-semibold'>{data.focus}</p>
+                        <p className='text-gray-400'>{data.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-            </div> */}
+            </div>
 
             <div className='sm:px-[10vw] px-[15vw] py-12'>
-            <h1 className='font-bold w-full text-left mb-8 lg:text-5xl sm:text-3xl text-2xl' style={{color: 'var(--primary-bg)'}}>Testimonials</h1>
+            <h1 className='font-semibold w-full text-center text-2xl mb-8'>Testimonials</h1>
             <Carousel >
-      <CarouselContent>
-        {feedbacks.map((feed, index) => (
-          <CarouselItem key={index} className='lg:basis-1/2'>
-              <Card>
-                <CardContent className="flex flex-col items-start gap-4 justify-center md:p-6 p-4">
+            <CarouselContent>
+            {feedbacks.map((feed, index) => (
+            <CarouselItem key={index} className='lg:basis-1/3'>
+              <>
+                <CardContent className="flex flex-col items-start gap-4 justify-center md:p-6 p-4 bg-white">
                         <Image className='h-14 text-sm md:text-base aspect-square w-fit object-cover rounded-full' src={feed.image} alt='user'/>
-                        <h1 className='font-bold md:text-xl text-lg'>{feed.name}</h1>
-                        <p>{feed.feedback}</p>
+                        <h1 className='font-semibold'>{feed.name}</h1>
+                        <p className=''>{feed.feedback}</p>
                 </CardContent>
-              </Card>
+              </>
           </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious/>
-      <CarouselNext />
-    </Carousel>
+          ))}
+          </CarouselContent>
+          <CarouselPrevious/>
+          <CarouselNext />
+          </Carousel>
+          </div>
+
+          <div className='lg:px-[10vw] px-[5vw] py-12 flex flex-col gap-6 items-center' style={{backgroundColor: 'var(--primary-color)'}}>
+              <p className='font-semibold text-2xl mb-4 text-white'>FAQs</p>
+              <div className='flex flex-col gap-8 lg:w-[80%] w-full'>
+              {faqData.map((data, index)=>
+              (
+                <Accordian data={data} key={data.id} index={index} showFaq={showFaq} setShowFaq={setShowFaq}/>
+              ))}
+              </div>
+          </div>
+
+          <div className='sm:px-[10vw] px-[5vw] py-12 flex lg:flex-row flex-col gap-8'>
+            <div className='lg:w-[50%] w-full space-y-4'>
+              <p className='font-semibold text-2xl'>Heard us enough?</p>
+              <h1 className='lg:text-4xl md:text-2xl text-xl  leading-snug font-semibold text-orange-700'>Request a Callback – Let Us Guide You to Success</h1>
+              <p className='text-gray-400'>Get personalized assistance, clear your doubts, and take the first step toward achieving your CAMS & CGSS certifications with expert guidance.</p>
             </div>
-
-            <div className='lg:px-[10vw] px-[5vw] py-12 flex flex-col gap-6' style={{backgroundColor: 'var(--primary-color)'}}>
-                <p className='font-bold lg:text-5xl sm:text-3xl text-2xl mb-4' style={{color: 'var(--action-color)'}}>FAQs</p>
-                <div className='flex flex-col gap-8'>
-                {faqData.map((data, index)=>
-                (
-                    <Accordian data={data} key={data.id} index={index} showFaq={showFaq} setShowFaq={setShowFaq}/>
-                ))}
-                </div>
+            <div className='lg:w-[50%] w-full'>
+              <RequestForm/>
             </div>
-
-            {/* <div className='lg:px-[10vw] space-y-8 px-[5vw] flex items-center justify-between bg-white py-12'>
-                <p className='text-gray-400 text-xl'>Heard us enough?</p>
-                <h1 className='font-bold text-5xl' style={{color: 'var(--primary-color)'}}>Contact Us</h1>
-            </div>
-             */}
-
-            <div style={{backgroundColor: 'var(--primary-color)'}}>
-            <Drawer className='px-[5vw]'>
-                <DrawerTrigger>
-                <Image className='fixed right-8 bottom-8 md:h-14 h-12 w-fit p-3 rounded-full cursor-pointer' src={chat} alt='query' style={{backgroundColor: 'var(--primary-color)'}}/>
-                </DrawerTrigger>
-                <DrawerContent>
-                    <DrawerHeader className='flex flex-col items-start gap-4'>
-                        <DrawerTitle className='mb-2 lg:text-2xl md:text-xl text-lg'>Drop your query, so that we get back to you ASAP!</DrawerTitle>
-                        
-                        <Label htmlFor="email">Full Name</Label>
-                        <Input className='lg:h-14 md:h-10 text-sm md:text-base' type="email" placeholder="Full Name" />
-                
-                        <Label htmlFor="email">Email</Label>
-                        <Input className='lg:h-14 md:h-10 text-sm md:text-base' type="email" placeholder="Email" />
-
-                        <Label htmlFor="email">Contact</Label>
-                        <Input className='lg:h-14 md:h-10 text-sm md:text-base' type="email" placeholder="Contact" />
-
-                        <Label htmlFor="email">Query</Label>
-                        <Input className='lg:h-14 md:h-10 text-sm md:text-base' type="email" placeholder="Query" />
-                    </DrawerHeader>
-                        <Button className='lg:h-12 h-10 text-sm md:text-base w-40 ml-4 mb-4'>Submit</Button>
-                </DrawerContent>
-            </Drawer></div>            
-            <Footer/>
+          </div>
+          <Footer/>
         </div>
     )
 }

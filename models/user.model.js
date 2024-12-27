@@ -39,6 +39,7 @@ const userSchema = new Schema({
     googleId: String,
     otp: Number,
     contact: String,
+    domain: String,
     experience: String,
     linkedIn: String,
     organisation: String,

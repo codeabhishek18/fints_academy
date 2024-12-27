@@ -29,7 +29,7 @@ export const details =
     }
 ]
 
-const CourseDetail = ({course}) =>
+const CourseDetail = ({course, level}) =>
 {
     const router = useRouter();
 
@@ -41,31 +41,29 @@ const CourseDetail = ({course}) =>
 
     return (
         <div className='flex flex-col gap-4'>
-                <p className='lg:text-3xl md:text-2xl text-xl font-bold' style={{color:'var(--primary-color)'}}>{course.title}</p>
-                <div className='md:h-[40vh] h-48 rounded flex items-center justify-center shadow-lg' style={{backgroundColor: ' var(--primary-color)'}}>
-                    <Image className='w-36 h-fit' src={course.imageURL} alt={course.title} width={100} height={100}/>
+            <p className='lg:text-3xl md:text-2xl text-xl font-bold' style={{color:'var(--primary-color)'}}>{course.title}</p>
+            <div className='md:h-[40vh] h-48 rounded flex items-center justify-center shadow-lg' style={{backgroundColor: ' var(--primary-color)'}}>
+                <Image className='h-[50%] w-fit' src={course.imageURL} alt={course.title} width={100} height={100}/>
+            </div>
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2'>
+            {details.map((data)=>
+            (
+                <div key={data.id} className='flex flex-col items-center bg-gray-100 p-4 rounded' style={{backgroundColor : 'var(--action-color)'}}>
+                    <h1 className='font-bold md:text-3xl text-2xl'>{data.header}</h1>
+                    <span>{data.detail}</span>
                 </div>
-                <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2'>
-                    {details.map((data)=>
-                    (
-                        <div key={data.id} className='flex flex-col items-center bg-gray-100 p-4 rounded' style={{backgroundColor : 'var(--action-color)'}}>
-                            <h1 className='font-bold md:text-3xl text-2xl'>{data.header}</h1>
-                            <span>{data.detail}</span>
-                        </div>
-                    ))}
-                </div>
-            
+            ))}
+            </div>
             <p className='leading-8'>{course.description}</p>
             
             <h1 className='lg:text-2xl text-xl font-bold'>Sessions in Brief</h1>
-            <div className='grid lg:grid-cols-2 grid-cols-1 gap-3'>
-                {course.lectures.map((lecture, index)=>
-                (
-                    <Lecturecard lecture={lecture} level='visitor' key={index}/>
-                )).slice(0,16)}
+            <div className='grid md:grid-cols-2 grid-cols-1 gap-4'>
+            {course.lectures.map((lecture)=>
+            (
+                <Lecturecard lecture={lecture} level={level} key={lecture._id}/>  
+            ))}
             </div>
-            <Button onClick={handleClick} className='w-fit md:h-12 h-10 text-sm md:text-base'>Join Now</Button>
-             
+            {level === 'visitor' && <Button onClick={handleClick} className='w-fit md:h-12 h-10 text-sm md:text-base font-semibold'>Join Now</Button>}
         </div>
     )
 }

@@ -97,6 +97,10 @@ const Settings = () =>
                         <span>{userData.organisation}</span>
                     </div>
                     <div className='flex md:flex-row flex-col gap-2'>
+                        <span className='md:w-[20%] w-[40%] font-semibold'>Domain</span>
+                        <span>{userData.domain}</span>
+                    </div>
+                    <div className='flex md:flex-row flex-col gap-2'>
                         <span className='md:w-[20%] w-[40%] font-semibold'>Experience</span>
                         <span>{userData.experience}</span>
                     </div>

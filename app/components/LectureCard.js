@@ -1,18 +1,11 @@
 'use client'
 
-import Image from 'next/image'
-import video from '@/assets/video.png'
 import { useState } from 'react'
-import upload from '@/assets/upload.png'
 import axios from 'axios'
-// import Upload from '../upload/Upload'
-import editIcon from '@/assets/edit.png' 
-// import VideoJS from '../mediaPlayer/MediaPlayer'
-// import ReactPlayer from 'react-player'
-// import SoundCloudPlayer from 'react-player/soundcloud'
-// import YouTubePlayer from 'react-player/youtube'
+import { Button } from '@/components/ui/button'
+import MediaPlayer from './MediaPlayer'
 
-const Lecturecard = ({lecture, level, type}) =>
+const Lecturecard = ({lecture, level}) =>
 {
     const [ play, setPlay ] = useState(false);
     const [ videoSrc, setVideo ] = useState(null);
@@ -34,8 +27,7 @@ const Lecturecard = ({lecture, level, type}) =>
             const url = '/api/videos'
             const response = await axios.post(url, {objectKey: 'test'});
             setVideo(response.data);
-            setPlay(true);
-            
+            // setPlay(true);
         }
         catch(error)
         {
@@ -46,15 +38,13 @@ const Lecturecard = ({lecture, level, type}) =>
     // DAY 17 Practice Questions.mp4
 
     return(
-        <div className='w-full text-base flex flex-col gap-2 justify-between rounded shadow-md bg-gray-100 p-6 z-10' >
-            {type === 'dashboard' ? <p >{lecture.title}</p> : <p>{lecture.title}</p>}
-            {level === 'visitor' ? 
-            <p className='text-gray-500'>2 hours</p> :
-            <div >
-                <Image src={lecture.recording.length > 1 ? editIcon  : upload} alt='upload' onClick={()=> setShowUpload(true)}/>
-                <button onClick={handlePlay}><Image  src={video} alt='icon'/> <span >Watch Recording</span></button>
-            </div>}
-
+        <div className='flex items-start gap-2 justify-between rounded shadow-md p-6 z-10' >
+            <div>
+                <p>{lecture.title}</p>
+                <span className='text-gray-400 md:text-sm text-xs'>2 hours</span>
+            </div>
+            {level !== 'visitor' && <Button onClick={handlePlay}>Watch recording</Button>}
+           
             {/* {showUpload && 
             <div className={styles.uploadWrapper}>
                 <Upload setShowUpload={setShowUpload}/>
@@ -62,9 +52,8 @@ const Lecturecard = ({lecture, level, type}) =>
 
             {play && 
             <div >
-                
-                {/* <VideoJS options={videojsOptions} title={lecture.title}/> */}
-                <button onClick={()=> setPlay(false)}>Back</button>
+                <MediaPlayer options={videojsOptions} title={lecture.title}/>
+                {/* <button onClick={()=> setPlay(false)}>Back</button> */}
             </div>}
         </div>
     )

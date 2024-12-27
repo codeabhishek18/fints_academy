@@ -22,6 +22,8 @@ import {
   FormLabel,
   FormMessage,
   FormMessageeFormMessage} from "@/components/ui/form"
+  import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 import axios from "axios"
 import { toast } from "sonner"
 
@@ -38,6 +40,9 @@ const formSchema = z.object({
   organisation: z.string().min(4, {
     message: "Enter valid company name",
   }),
+  domain: z.string().min(3, {
+    message: "Select a domain",
+  }),
   experience: z.string().min(1, {
     message: "Invalid experience",
   }),
@@ -46,20 +51,71 @@ const formSchema = z.object({
   }),
 })
 
+export const domains = 
+[
+    {
+        id: 1,
+        domain: 'Transaction Monitoring'
+    },
+    {
+        id: 2,
+        domain: 'KYC'
+    },
+    {
+        id: 3,
+        domain: 'CDD'
+    },
+    {
+        id: 4,
+        domain: 'SAR/STR'
+    },
+    {
+        id: 5,
+        domain: 'Teller/Front Office'
+    },
+    {
+        id: 6,
+        domain: 'QC/QA'
+    },
+    {
+        id: 7,
+        domain: 'Legal'
+    },
+    {
+        id: 8,
+        domain: 'Audit'
+    },
+    {
+        id: 9,
+        domain: 'Fraud'
+    },
+    {
+        id: 10,
+        domain: 'Risk Ops'
+    },
+    {
+        id: 11,
+        domain: 'Others'
+    },
+] 
+
 const ProfileDetails = ({userData, setEditInfo, editInfo, getUserData}) =>
 {
-    const { name, contact, linkedIn, organisation, experience, country } = userData;
+    const { name, contact, linkedIn, organisation, experience, country, domain } = userData;
+
+    console.log(userData)
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: 
         {
-            name,
-            contact,
-            linkedIn,
-            organisation,
-            experience,
-            country, 
+            name: name ?? "",
+            contact: contact ?? "",
+            linkedIn: linkedIn ?? "",
+            organisation: organisation ?? "",
+            experience: experience ?? "",
+            country: country ?? "", 
+            domain: domain ?? ""
         },
     })
 
@@ -137,6 +193,31 @@ const ProfileDetails = ({userData, setEditInfo, editInfo, getUserData}) =>
                         <FormMessage/>
                     </FormItem>)}
                 />
+
+            <FormField
+                control={form.control}
+                name="domain"
+                render={({ field }) => (
+                <FormItem>
+                <FormLabel>Domain</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl className='md:h-12 h-10 text-sm'>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your domain" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {domains.map((data)=>
+                  (
+                    <SelectItem className='md:h-12 h-10 text-sm' value={data.domain} key={data.id}>{data.domain}</SelectItem>
+                  ))}                  
+                </SelectContent>
+                </Select>
+                <FormMessage />
+            </FormItem>
+            )}
+            />
+
                 <FormField
                     control={form.control}
                     name="experience"

@@ -111,7 +111,7 @@ const Checkout = () =>
                 
                  
                 <div className='flex flex-col gap-4'>
-                    <div className='flex justify-between items-center gap-4 p-4 rounded bg-gray-100 shadow-md'>
+                    <div className='flex justify-between items-center gap-4 p-4 rounded shadow-md'>
                         <div className='flex gap-4 items-center'>
                             <Image className='h-16 w-fit rounded-full' src={course.imageURL} alt={course.id} width={150} height={150} style={{backgroundColor: 'var(--primary-color)'}}/>
                             <p className='font-semibold'>{course.title}</p>

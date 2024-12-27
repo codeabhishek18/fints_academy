@@ -76,7 +76,7 @@ body {
 body
 {
   margin: 0;
-  background-color: white;
+  background-color:#f8fafc;
 }
 
 *
@@ -86,7 +86,7 @@ body
 
 :root
 {
-  --primary-color: #152a41;
+  --primary-color: #081524;
   --primary-bg: #0B192C;
   --secondary-color: white;
   --action-color: #FCC419;

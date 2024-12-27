@@ -67,7 +67,7 @@ const Course = () =>
                 </BreadcrumbList>
             </Breadcrumb>
             <div>
-                <CourseDetail course={course}/>
+                <CourseDetail course={course} level='visitor'/>
             </div>
             </div>
             

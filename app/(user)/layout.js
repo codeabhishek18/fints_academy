@@ -40,7 +40,7 @@ export default function Layout({ children })
         }
         catch(error)
         {
-            toast(error);
+            toast(error.message);
         }
     }
 
