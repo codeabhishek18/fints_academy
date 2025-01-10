@@ -20,8 +20,8 @@ const Navbar = ({ scrollIntoSection, section4 }) =>
         <div className='z-10 absolute bg-[rgba(0,0,0,0.5)] top-0 left-0 w-[100%] flex justify-between p-5 text-white'>
             <Image className='h-7 w-fit' src={logo} alt='logo' onClick={()=> router.push('/')}/>  
             <div className='sm:space-x-4 space-x-2'>
-                <Button className='sm:text-sm text-xs md:p-4 p-2' onClick={()=> scrollIntoSection(section4)}>Request Callback</Button>
-                <Button className='sm:text-sm text-xs md:p-4 text-black' variant='outline'  onClick={()=> router.push('/login')}>Login</Button>
+                <Button className='sm:text-sm text-xs md:p-4 p-2 rounded' onClick={()=> scrollIntoSection(section4)}>Request Callback</Button>
+                <Button className='sm:text-sm text-xs md:p-4 rounded' variant='outline'  onClick={()=> router.push('/login')}>Login</Button>
             </div>
         </div>
     )

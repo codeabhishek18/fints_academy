@@ -9,7 +9,7 @@ import { Card } from '@/components/ui/card'
 const Accordian = ({data, index, showFaq, setShowFaq}) =>
 {
     return(
-        <div className='flex flex-col gap-2 p-6 rounded-xl border shadow-lg bg-white'>
+        <div className='flex flex-col gap-2 p-6 rounded-xl shadow-lg bg-white'>
             <div className='flex items-start justify-between gap-2'>
                 <BoxReveal boxColor='white' duration={0.5}>
                     <p className={`${showFaq === index+1 ? 'font-semibold'  : ''}`}>{data.question}</p>

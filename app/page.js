@@ -306,7 +306,7 @@ const Home = () =>
     }
 
     return(
-        <div className='md:text-base text-sm md:leading-7 leading-5 '>
+        <div className='md:text-base text-sm md:leading-7 leading-5 text-black'>
             
             {/* <div className='bg-black flex p-5 rounded-full fixed md:w-[60%] w-[90%] md:left-[20%] left-[5%] top-[85%] text-gray-300 md:justify-evenly justify-between lg:text-sm text-xs font-semibold z-30 border border-gray-800'>
               <p className='cursor-pointer hover:scale-105' onClick={()=> scrollIntoSection(section1)}>Trainings</p>
