@@ -51,7 +51,9 @@ export async function GET()
         await dbConnect();
 
         const mentors = await mentorInstance.getAllMentors()
-        return NextResponse.json(mentors);
+        if(!mentors)
+            throw new Error('Mentors not found')
+        return NextResponse.json({mentors});
     }    
     catch(error)
     {

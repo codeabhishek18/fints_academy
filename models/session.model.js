@@ -6,17 +6,19 @@ const sessionSchema = new Schema({
         type: Number,
         required: true
     },
-    lecture:
+    description:
     {
-        type: Schema.Types.ObjectId,
-        ref: 'Lecture'
+        type: String,
+        required: true
     },
+    duration: String,
     status:
     {
         type : String,
         enum : ['Upcoming', 'Completed'],
         default: 'Upcoming'
-    }
+    },
+    recording: String
 },
 {
     timestamps : true

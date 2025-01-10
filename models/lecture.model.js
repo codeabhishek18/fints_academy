@@ -1,12 +1,16 @@
 import mongoose, { Schema } from "mongoose";
 
 const lectureSchema = new Schema({
-    title:
+    description:
     {
         type: String,
         required: true
     },
-    recording: String
+    duration:
+    {
+        type: Number,
+        required: true
+    }
 },{timestamps: true})
 
 export const Lecture = mongoose.models?.Lecture || mongoose.model('Lecture', lectureSchema)

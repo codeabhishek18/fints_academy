@@ -23,8 +23,8 @@ const Dashboard = () =>
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
             setUserData(response.data);
-            if(!response.data.isProfileComplete)
-                router.push('/settings')
+            // if(!response.data.isProfileComplete)
+            //     router.push('/settings')
         }
         catch(error)
         {
@@ -53,10 +53,10 @@ const Dashboard = () =>
         
     return(
         <div>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1'>
-                {userData?.enrollments?.map((data)=>
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4'>
+                {userData?.enrollments?.map((enrollment)=>
                 (
-                    <BatchCard data={data.batch} key={data._id}/>
+                    <BatchCard batch={enrollment.batch} enrollment={enrollment} key={enrollment._id}/>
                 ))}
             </div>
             {/* <ProfileDetails userData={userData}/> */}

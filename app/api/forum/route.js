@@ -16,7 +16,7 @@ export async function GET(req, res)
         const discussions = await forumInstance.findAll(searchKey);
         const orderedDiscussion = orderKey === "dec" ? discussions.sort((a,b)=> b.updatedAt - a.updatedAt) : discussions
         const disccussionTopic = topic ? orderedDiscussion.filter((discussion) => discussion.keywords.includes(topic)) : orderedDiscussion;
-        return NextResponse.json(disccussionTopic)
+        return new Response(JSON.stringify(disccussionTopic))
     }
     catch(error)
     {
@@ -33,10 +33,10 @@ export async function POST(req, res)
 
         console.log(title, author, keywords)
         const discussion = await forumInstance.addNewDiscussion(title, author, keywords);
-        return NextResponse.json({message: 'Discussion posted'})
+        return NextResponse.json({discussion})
     }
     catch(error)
     {
-        return NextResponse.json({error: error.message})
+        return NextResponse.json({error})
     }
 }

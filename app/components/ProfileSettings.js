@@ -24,9 +24,9 @@ const ProfileSettings = () =>
         <Sheet>
         <SheetTrigger asChild>
         <div className="space-y-1 cursor-pointer">
-            <div className="px-4 py-0.5 rounded" style={{backgroundColor:'var(--action-color)'}}></div>
-            <div className="px-4 py-0.5 rounded" style={{backgroundColor:'var(--action-color)'}}></div>
-            <div className="px-4 py-0.5 rounded" style={{backgroundColor:'var(--action-color)'}}></div>
+            <div className="px-4 py-0.5 rounded bg-white"></div>
+            <div className="px-4 py-0.5 rounded bg-white"></div>
+            <div className="px-4 py-0.5 rounded bg-white"></div>
         </div>
         </SheetTrigger>
         <SheetContent className='text-sm'>

@@ -57,18 +57,18 @@ const Settings = () =>
     return(
         <div className='space-y-8 md:text-base text-sm'>
             <div className='flex gap-4'>
-                <h1 className="lg:text-3xl text-2xl font-semibold" style={{color: 'var(--primary-color)'}}>Profile Settings</h1>
+                <h1 className="text-2xl font-semibold">Profile Settings</h1>
                 <ProfileDetails userData={userData} setEditInfo={setEditInfo} editInfo={editInfo} getUserData={getUserData}/>
             </div>
             <div className='h-[40vh] flex md:flex-row flex-col md:p-8 p-2 md:justify-start md:items-end justify-end items-center md:gap-8 gap-2 relative'>
-                <div className='absolute md:p-0 pt-2 top-0 left-0 flex justify-center md:items-center items-start rounded-xl w-[100%] h-full' style={{backgroundColor: 'var(--primary-color)'}}>
-                    <Image className='md:h-24 h-32 w-fit' src={logo} width={100} height={100} alt='FINTS AML'/>
+                <div className='absolute md:p-0 pt-2 top-0 left-0 flex justify-center md:items-center items-start rounded-xl w-[100%] h-full shadow-lg bg-black'>
+                    <Image className='md:h-12 h-10 w-fit' src={logo} width={100} height={100} alt='FINTS AML'/>
                 </div>
                 <div className='z-10 flex gap-2 md:flex-row flex-col md:items-end items-center relative'>
                 <UpdateDisplayPicture userData={userData} getUserData={getUserData} editDP={editDP} setEditDP={setEditDP}/>
                 <div className='flex flex-col gap-1 mt-1'>
-                    <span className='md:text-2xl text-xl font-semibold text-white'>{userData.name}</span>
-                    <span className='md:text-base text-md md:text-start text-center text-gray-500 font-semibold'>{userData.country}</span>
+                    <span className='text-xl font-semibold text-white'>{userData.name}</span>
+                    <span className='md:text-base text-sm md:text-start text-center text-gray-500 font-semibold'>{userData.country}</span>
                 </div>    
             </div>
             </div>

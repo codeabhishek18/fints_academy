@@ -87,35 +87,37 @@ const Login = () =>
     }
 
     return(
-        <div className='h-[100vh] flex items-center justify-center' style={{backgroundColor:'var(--primary-bg)'}}>
-            <div className='bg-white rounded w-96 p-6'> 
-                <div className='flex justify-center mb-4'>
-                    <Image className='h-16 w-fit' src={logo} alt='logo'/>
+        <div className='h-[100vh] flex items-center justify-center'>
+            <Image className='object-cover h-[100%]' src='https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='FINTS AML' layout='fill' priority={true}/>
+            
+            <div className='sm:p-8 p-4 rounded-xl shadow-2xl bg-black border sm:w-96 border-gray-800 w-[85%] z-10'> 
+                <div className='flex justify-center mb-10'>
+                    <Image className='h-7 w-fit cursor-pointer' src={logo} alt='logo' onClick={()=> router.push('/')}/>
                 </div>
                 <div className='w-full flex flex-col gap-4 items-center'>
-                    <form className='flex flex-col w-full gap-4'onSubmit={handleSubmit}>
-                        <Input className='h-12' name="email" type="text" placeholder="Email" />
-                        <Input className='h-12' name="password" type="text" placeholder="Password" />
+                    <form className='flex flex-col w-full gap-4 text-white'onSubmit={handleSubmit}>
+                        <Input className='sm:h-12 h-10 sm:text-sm text-xs border-gray-800' name="email" type="text" placeholder="Email" />
+                        <Input className='sm:h-12 h-10 sm:text-sm text-xs border-gray-800' name="password" type="text" placeholder="Password" />
 
                         {isError && 
-                        <div className='flex gap-2 items-center text-sm'>
+                        <div className='flex gap-2 items-center sm:text-sm text-xs'>
                             <Image className='h-6 w-fit' src={erroricon} alt='error'/>
                             <p className='text-red-600'>{errorMessage}</p>
                         </div>}
 
                         {success && 
-                       <div className='flex gap-2 items-center text-sm'>
+                       <div className='flex gap-2 items-center sm:text-sm text-xs'>
                        <Image className='h-6 w-fit' src={successicon} alt='error'/>
                        <p className='text-green-600'>{successMessage}</p>
                    </div>}
-                        <Button type='submit'>Login</Button>
+                        <Button type='submit' className='h-10'>Login</Button>
                     </form>
 
-                    <p className=''>or</p>
+                    <p className='text-white'>or</p>
                     <GoogleAuth/>
                 </div>
-                <div className='text-center mt-2 text-sm text-gray-400'>Don't have an account?
-                    <Link href='/signup' className='pl-1 hover:text-yellow-300 cursor-pointer'>Signup</Link>
+                <div className='text-center mt-4 text-gray-400 sm:text-sm text-xs'>Don't have an account?
+                    <Link href='/signup' className='pl-1 hover:text-red-500 cursor-pointer'>Signup</Link>
                 </div>
                 {/* <div className='text-center'>
                     <Link href='/reset-password' className='mt-2 text-sm text-blue-900 hover:underline'>Forgot password</Link>

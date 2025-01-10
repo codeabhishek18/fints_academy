@@ -45,11 +45,12 @@ export default function Layout({ children })
     }
 
     return(
-        <div className=''>
+        <div className='min-h-[100vh] bg-black'>
             <Header userData={userData}/>
+                         
             {/* <UserPanel/> */}
             
-            <div className='pt-28 lg:px-[10vw] px-[5vw] pb-12'>
+            <div className='pt-28 lg:px-[10vw] px-[5vw] pb-12 relative'>
                 {children}
             </div>
 

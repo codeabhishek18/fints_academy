@@ -20,7 +20,7 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 
-const BatchCard = ({type, level, data, participants, removeBatch, batchId}) =>
+const BatchCard = ({type, level, batch, participants, removeBatch, batchId, enrollment}) =>
 {
     const router = useRouter();
     const pathname = usePathname();
@@ -47,21 +47,20 @@ const BatchCard = ({type, level, data, participants, removeBatch, batchId}) =>
     }
 
     return(
-        <Link href={level === 'admin' ? (type === 'batch' ? `/admin/batches/${data.title}` : `${pathname}/${batchId}`) : `/course/${data.course.id}?batchId=${data.title}`}>
-            <Card className='p-4 rounded flex flex-col gap-4 relative'>
-            <div className='rounded flex flex-col p-4 justify-center items-center shadow-md' style={{backgroundColor: 'var(--primary-color)'}}>
-                <Image src={data.course.imageURL} alt={data.title} height={150} width={150}/>
-                <p className='text-2xl font-semibold text-gray-100'>{data.title.split('-')[1]}</p>
+        <Link className='p-4 rounded-md flex flex-col gap-4 border border-gray-800 bg-black text-white text-sm relative shadow-lg' href={level === 'admin' ? (type === 'batch' ? `/admin/batches/${batch.title}` : `${pathname}/${batchId}`) : `/course/${batch.course.id}?enrollmentId=${enrollment._id}`}>
+            
+            <div className='rounded flex h-40 flex-col p-4 justify-center items-center shadow-md relative'>
+                <Image className='rounded' src={batch.course.imageURL} alt={batch.title} layout='fill'/>
+                <p className='text-xl font-semibold text-gray-100'>{batch.title.split('-')[1]}</p>
             </div>
             
             {/* {level === 'admin' && type === 'batch' && <Image className='h-5 w-5 absolute top-8 right-8 cursor-pointer' src={deleteIcon} alt='delete' onClick={deleteBatch}/>} */}
-            {level !== "admin" && <p className='font-semibold'>{data.course.title}</p>}
-            <p className='absolute top-8 left-8 bg-gray-300 p-1 rounded text-xs '>{FormatDate(data.startDate)}</p>
-            <div className='flex justify-between items-end'>
-                {level === "admin" ? (type === 'batch' ? <p> Enrollments : {data.enrollments.length}</p> : <p> Participants : {participants}</p>) : <p>{data.sessions.length} lectures</p>}
-                <p>{data.status}</p>
+            {level !== "admin" && <p className='font-semibold text-base'>{batch.course.title}</p>}
+            <p className='absolute top-6 right-6 bg-gray-600 p-1 rounded text-xs '>{FormatDate(batch.startDate)}</p>
+            <div className='flex justify-between items-end text-gray-400'>
+                {level === "admin" ? (type === 'batch' ? <p> Enrollments : {batch.enrollments.length}</p> : <p> Participants : {participants}</p>) : <p>{batch.sessions.length} lectures</p>}
+                <p>{batch.status}</p>
             </div> 
-        </Card>
         </Link>
     )
 }

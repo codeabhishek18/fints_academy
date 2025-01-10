@@ -1,34 +1,28 @@
-export const faqData = [
-      {
+export const faqData =
+[
+    {
         id: 1,
-        question: "What is CAMS?",
-        answer: "CAMS (Certified Anti-Money Laundering Specialist) is a certification offered by ACAMS, which demonstrates a professional's expertise in Anti-Money Laundering and financial crime prevention."
-      },
-      {
+        question: 'What is FINTS?', 
+        answer: 'FinCrime Trusted Source is a company specializing in the issuance of certifications related to financial crime prevention, including AML (Anti-Money Laundering), sanctions evasion techniques, KYC and Global standards.'
+    },
+    {
         id: 2,
-        question: "Who should take the CAMS certification?",
-        answer: "The CAMS certification is suitable for professionals working in compliance, AML, financial institutions, law enforcement, or any field related to financial crime prevention."
-      },
-      {
+        question: 'Who can benefit from your certifications?', 
+        answer: 'Our certifications are ideal for professionals in the finance, banking, and compliance sectors, as well as individuals looking to advance their careers in financial crime prevention.'
+    },
+    {
         id: 3,
-        question: "What are the requirements to become CAMS certified?",
-        answer: "Candidates must have relevant work experience in AML or financial crime, and earn enough ACAMS credits based on education and professional background to be eligible for the CAMS certification exam."
-      },
-      {
+        question: 'How are these courses different from freely available information online?', 
+        answer: "These courses are designed with a deep understanding of the advanced knowledge that professionals possess and the critical insights needed to excel in the FinCrime field. The curriculum includes practical case studies drawn from our trainers' extensive experience in compliance departments, providing a comprehensive understanding of end-to-end processes."
+    },
+    {
         id: 4,
-        question: "How many questions are on the CAMS exam?",
-        answer: "The CAMS exam consists of 120 multiple-choice and multiple-select questions."
-      },
-      {
+        question: 'Additionally, does FINTS offer any job assistance programs?', 
+        answer: 'Earning a certification from FinCrime Trusted Source not only enhances your credentials and improves job prospects but also establishes your expertise in financial crime prevention. Our programs foster a strong professional network among participants, offering opportunities for mutual support, job referrals, and access to job interview preparation and CV enhancement services.'
+    },
+    {
         id: 5,
-        question: "What is the passing score for the CAMS exam?",
-        answer: "The passing score for the CAMS exam is 75 out of 120 questions."
-      },
-      {
-        id: 6,
-        question: "How often must CAMS certification be renewed?",
-        answer: "CAMS certification must be renewed every three years by completing 60 continuing education credits."
-      },
+        question: 'Are there any ongoing learning opportunities after certification?', 
+        answer: 'Yes, we offer advanced courses, webinars, and workshops to help you stay updated on the latest trends and developments in financial crime prevention.'
+    }
 ]
-
-  

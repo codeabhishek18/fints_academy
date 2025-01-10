@@ -35,13 +35,18 @@ const Lecturecard = ({lecture, level}) =>
         }
     }
 
+    console.log(lecture)
+
     // DAY 17 Practice Questions.mp4
 
     return(
-        <div className='flex items-start gap-2 justify-between rounded shadow-md p-6 z-10' >
-            <div>
-                <p>{lecture.title}</p>
-                <span className='text-gray-400 md:text-sm text-xs'>2 hours</span>
+        <div className='flex items-start gap-2 justify-between rounded shadow-md'>
+            
+            <div className='space-y-2 w-full'>
+            {lecture.modules.map((module, index)=>
+            (
+                <p className='bg-black w-full p-4 border border-gray-800 rounded-xl shadow-md' key={index}>{module}</p>
+            ))}
             </div>
             {level !== 'visitor' && <Button onClick={handlePlay}>Watch recording</Button>}
            

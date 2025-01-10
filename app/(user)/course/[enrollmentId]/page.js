@@ -9,6 +9,9 @@ import { Suspense, useEffect, useState } from "react";
 import { toast } from 'sonner';
 import Link from 'next/link';
 import Loading from '@/app/components/Loading';
+import Progress from '@/app/components/Progress';
+import SessionCard from '@/app/components/SessionCard';
+import { Card } from '@/components/ui/card';
 
 export const pendingSessions = (sessions) =>
 {
@@ -39,26 +42,31 @@ const Batch = () =>
     const [ activeAgenda, setActiveAgenda ] = useState(-1);
     const [ enrollment, setEnrollment ] = useState(null);
     const params = useSearchParams();
-    const batchId = params.get('batchId');
+    const enrollmentId = params.get('enrollmentId');
     const router = useRouter();
     
-    const getBatchData = async () =>
+    const getEnrollment = async () =>
     {
         try
         {
-            const url = `/api/batch/${batchId}`
+            const url = `/api/enrollment/${enrollmentId}`
             const response = await axios.get(url);
-            if(response.data.access === 'false')
-            {
-                router.push('/dashboard')
-                toast('Access Denied')
-            }
-            setBatchData(response.data)
-            checkfeedback(response.data)
+            setEnrollment(response.data)
+            // if(response.data.access === 'false')
+            // {
+            //     router.push('/dashboard')
+            //     toast('Access Denied')
+            // }
+            // setBatchData(response.data)
+            // checkfeedback(response.data)
         }
         catch(error)
         {
-            console.log(error);
+            toast(error.message);
+        }
+        finally
+        {
+            setIsLoading(false)
         }
     }
 
@@ -69,28 +77,27 @@ const Batch = () =>
             setHideFeedback(false);
     }
     
-    const getAsssessments = async () =>
-    {
-        try
-        {
-            const url = `/api/user/${data.user.id}`
-            const response = await axios.get(url);
-            const batchEnrollment = response.data.enrollments.find((enrollment) => enrollment.batch.title === batchId);
-            setEnrollment(batchEnrollment);
-            setIsLoading(false);
-        }
-        catch(error)
-        {
-            toast.error(error.message)
-        }
-    }
+    // const getAsssessments = async () =>
+    // {
+    //     try
+    //     {
+    //         const url = `/api/user/${data.user.id}`
+    //         const response = await axios.get(url);
+    //         const batchEnrollment = response.data.enrollments.find((enrollment) => enrollment.batch.title === batchId);
+    //         setEnrollment(batchEnrollment);
+    //         setIsLoading(false);
+    //     }
+    //     catch(error)
+    //     {
+    //         toast.error(error.message)
+    //     }
+    // }
     
     useEffect(() => 
     {
         if(status === "authenticated")
         {
-            getBatchData();
-            getAsssessments();
+            getEnrollment()
         }
         else if(status === "unauthenticated")
             router.push('/')
@@ -99,15 +106,18 @@ const Batch = () =>
             
     }, [status]);
 
+    console.log(enrollment)
+
     if(status === 'loading' || isLoading)
     return(
         <Loading/>   
     )
 
     return(
-        <div onClick={()=> setActiveAgenda(-1)} className={styles.wrapper}>
+        <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 text-sm'>
+            <Progress batch={enrollment.batch} level='user'/>
 
-            {batchData &&
+            {/* {batchData &&
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                 <div className='rounded p-4 flex flex-col gap-2 items-center justify-center min-h-48' style={{backgroundColor: 'var(--primary-color)'}}>
                     <Image className='h-32 w-fit' src={batchData.course.imageURL} alt={batchData.title} width={100} height={100}/>
@@ -165,40 +175,27 @@ const Batch = () =>
                     <Link href='/forum' className={styles.route}>Connect</Link>
                     </div>
                 </div>
-            </div>}
-
-        
-            {/* {batchData &&
-            <div className={styles.container} >
-                <div className={styles.progress}>
-                    <Progress batchData={batchData} level='user' enrollment={enrollment}/>
-                </div>
-
-                <div className={styles.practicals}>
-                    {enrollment.access === 'true' &&
-                    <div className={styles.sessions}>
-                        {batchData.sessions.map((session, index)=>
-                        (
-                            <div className={styles.sessions}>
-                                <SessionCard session={session} index={index} setActiveAgenda={setActiveAgenda} activeAgenda={activeAgenda} level='user' key={data._id}/>
-                                {session.status === 'Completed' && 
-                                <Lecturecard lecture={session} level='admin' type='dashboard'/>}
-                            </div>
-                        ))}
-                    </div>}
-                </div>
             </div>} */}
 
-            {/* <div className={styles.assessmentWrapper}>
-                {enrollment.enrollment.length > 0 && <p className='' style={{color: 'var(--action-color)'}}>enrollment</p>}
-                <div className={styles.enrollment}>
-                    {enrollment?.enrollment?.map((assessment, index)=>
-                    (
-                        <AssessmentCard assessment={assessment} index={index} key={data._id} batchId={batchId}/>
-                    )
-                )}
+        
+           
+
+            <div className='space-y-2'>
+            {enrollment.batch.sessions.map((session, index)=>
+            (
+                <SessionCard session={session} level='user' index={index} key={session._id}/>
+             
+            ))}
+            </div>                               
+
+            <div className='grid grid-cols-2 gap-4'>
+            {enrollment.assessments.map((assessment)=>
+            (
+                <Card className='p-4' key={assessment._id}>
+                    {assessment.status}
+                </Card>
+            ))}
             </div>
-            </div> */}
 
             {/* {hideFeedback && <Image className={styles.feedback} alt='feedback' onClick={()=> setFeedbackForm(true)} onMouseEnter={()=> setFeedbackTooltip(true)} onMouseLeave={()=> setFeedbackTooltip(false)}/>}
             {feedbackTooltip && <p className={styles.toolTip}>Feedback</p>}

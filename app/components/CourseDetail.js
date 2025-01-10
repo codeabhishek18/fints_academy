@@ -40,30 +40,23 @@ const CourseDetail = ({course, level}) =>
     }
 
     return (
-        <div className='flex flex-col gap-4'>
-            <p className='lg:text-3xl md:text-2xl text-xl font-bold' style={{color:'var(--primary-color)'}}>{course.title}</p>
-            <div className='md:h-[40vh] h-48 rounded flex items-center justify-center shadow-lg' style={{backgroundColor: ' var(--primary-color)'}}>
-                <Image className='h-[50%] w-fit' src={course.imageURL} alt={course.title} width={100} height={100}/>
+        <div className='flex lg:flex-row flex-col gap-8 text-white'>
+            <div className='md:h-[70vh] lg:sticky lg:top-32 lg:w-[40%] w-full h-48 rounded flex items-center justify-center shadow-lg relative' style={{backgroundColor: ' var(--primary-color)'}}>
+                <Image className='h-[50%] w-fit rounded-xl object-cover' src={course.imageURL} alt={course.title} layout='fill'/>
             </div>
-            <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2'>
-            {details.map((data)=>
-            (
-                <div key={data.id} className='flex flex-col items-center bg-gray-100 p-4 rounded' style={{backgroundColor : 'var(--action-color)'}}>
-                    <h1 className='font-bold md:text-3xl text-2xl'>{data.header}</h1>
-                    <span>{data.detail}</span>
-                </div>
-            ))}
-            </div>
-            <p className='leading-8'>{course.description}</p>
-            
-            <h1 className='lg:text-2xl text-xl font-bold'>Sessions in Brief</h1>
-            <div className='grid md:grid-cols-2 grid-cols-1 gap-4'>
+            <div className='lg:w-[60%] w-full space-y-4 text-sm'>
+            <p className='md:text-3xl text-2xl font-bold text-green-300'>{course.title}</p>
+            <p className='bg-white text-black shadow-md w-fit rounded-xl px-2 py-1'>{course.level}</p>
+            <p className='leading-8 text-gray-300'>{course.description}</p>
+            {/* <h1 className='md:text-xl text-lg font-semibold'>Modules in brief</h1> */}
+            <div className='grid grid-cols-1 gap-2 '>
             {course.lectures.map((lecture)=>
             (
                 <Lecturecard lecture={lecture} level={level} key={lecture._id}/>  
             ))}
             </div>
-            {level === 'visitor' && <Button onClick={handleClick} className='w-fit md:h-12 h-10 text-sm md:text-base font-semibold'>Join Now</Button>}
+            {/* {level === 'visitor' && <Button onClick={handleClick} className='w-fit md:h-12 h-10 text-sm md:text-base font-semibold'>Join Now</Button>} */}
+            </div>
         </div>
     )
 }

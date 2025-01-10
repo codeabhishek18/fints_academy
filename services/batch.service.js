@@ -1,11 +1,13 @@
-import { Course } from "@/models/course.model.js";
-import { Batch } from "../models/batch.model.js"; 
-import { User } from "@/models/user.model.js";
-import { Session } from "@/models/session.model.js";
-import { Mentor } from "@/models/mentor.model.js";
-import { Feedback } from "@/models/feedback.model.js";
-import { Enrollment } from "@/models/enrollment.model.js";
-import { Lecture } from "@/models/lecture.model.js";
+import { Batch } from "@/models/batch.model"
+import { Course } from "@/models/course.model"
+import { Enrollment } from "@/models/enrollment.model"
+import { Feedback } from "@/models/feedback.model"
+import { Mentor } from "@/models/mentor.model"
+import { Session } from "@/models/session.model"
+import { Trigger } from "@/models/trigger.model"
+import { TriggerResponse } from "@/models/triggerResponse.model"
+import { User } from "@/models/user.model"
+
 
 class batchService
 {
@@ -19,8 +21,7 @@ class batchService
         }
         catch(error)
         {
-            console.log(error)
-            throw new Error(error.message)
+            throw error
         }
     }
 
@@ -29,24 +30,12 @@ class batchService
         try
         {
             const batch = await Batch.findOne({title})
-            .populate({path: 'course', model: Course, populate:{path: 'feedbacks', model: Feedback}})
-            .populate({path: 'enrollments', model: Enrollment, populate: {path: 'user', model: User}})
-            .populate({path: 'sessions', model: Session, populate: {path: 'lecture', model: Lecture}})
+            .populate({path: 'course', model: Course, populate:[{path: 'feedbacks', model: Feedback}, {path: 'simulation', model: Trigger}]})
+            .populate({path: 'enrollments', model: Enrollment, populate: [{ path: 'user', model: User}, {path: 'simulation', model: TriggerResponse}]})
+            .populate({path: 'sessions', model: Session})
             .populate({path: 'mentor', model: Mentor})
             return batch 
         } 
-        catch(error)
-        {
-            throw error
-        }
-    }
-
-    async updateBatchAccess(batchId, access)
-    {
-        try
-        {
-            return await Batch.findByIdAndUpdate(batchId, {$set : {access}});
-        }
         catch(error)
         {
             throw error
@@ -70,10 +59,24 @@ class batchService
     {
         try
         {
-            const batches = await Batch.find()
+            const batches = await Batch.find({})
             .populate({path: 'course', model: Course})
             .populate({path: 'mentor', model: Mentor});
             return batches
+        } 
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async getBatchesByCourse(courseId)
+    {
+        try
+        {
+            const batches = await Batch.find({course: courseId})
+            .populate({path: 'course', model: Course});
+            return batches.length ? batches : null
         } 
         catch(error)
         {
@@ -101,7 +104,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to create session')
+            throw error
         }
     }
 
@@ -114,19 +117,31 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to fetch upcoming batches')
+            throw error
         }
     }
 
-    async enrollUser(batchId, enrollmentId)
+    async enrollUser(batchId, userId)
     {
         try
         {
-            return await Batch.findByIdAndUpdate(batchId, {$push :{ enrollments : enrollmentId}})
+            return await Batch.findByIdAndUpdate(batchId, {$push :{ enrollments : userId}})
         }
         catch(error)
         {
-            throw new Error('Failed to update student to batch')
+            throw error
+        }
+    }
+
+    async updateSimulationResponses(batchId, simulationId)
+    {
+        try
+        {
+            return await Batch.findByIdAndUpdate(batchId, { $push : { simulationResponses : simulationId}});
+        }
+        catch(error)
+        {
+            throw error
         }
     }
 
@@ -138,7 +153,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to update link')
+            throw error
         }
     }
 
@@ -150,7 +165,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to update link')
+            throw error
         }
     }
 }

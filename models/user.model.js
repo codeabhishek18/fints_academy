@@ -15,12 +15,16 @@ const userSchema = new Schema({
     {
         type: String
     },
+    phone:
+    {
+        type: Number
+    },
     enrollments: 
     [{
         type: Schema.Types.ObjectId,
         ref: 'Enrollment'
     }],
-    chat:
+    chats:
     [{
         type: Schema.Types.ObjectId,
         ref: 'Chat'    
@@ -31,20 +35,15 @@ const userSchema = new Schema({
         enum: ['visitor', 'user', 'mentor', 'admin'],
         default: 'visitor'
     },
-    isProfileComplete:
+    status:
     {
-        type: Boolean,
-        default: false
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'inactive'
     },
     googleId: String,
-    otp: Number,
-    contact: String,
-    domain: String,
-    experience: String,
-    linkedIn: String,
-    organisation: String,
-    country: String,
     imageURL: String,
+    linkedin: String,
 },
 {
     timestamps: true

@@ -2,11 +2,11 @@ import { Lecture } from "@/models/lecture.model";
 
 class lectureService
 {
-    async addNewLecture(title, recording)
+    async addNewLecture(description, duration)
     {
         try
         {
-            const lecture = await Lecture.create({title, recording})
+            const lecture = await Lecture.create({description, duration})
             await lecture.save();
             return lecture
         }

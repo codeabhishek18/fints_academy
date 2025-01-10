@@ -22,12 +22,6 @@ const batchSchema = new Schema(
             enum: ['Upcoming', 'Ongoing', 'Completed'],
             default : 'Upcoming'
         },
-        access:
-        {
-            type: String,
-            enum: [true, false],
-            default : true
-        },
         sessions:
         [{
             type: Schema.Types.ObjectId,

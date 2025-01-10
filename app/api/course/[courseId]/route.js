@@ -9,7 +9,7 @@ export async function GET(req, {params})
     {
         await dbConnect();
 
-        const { courseId } =  await params
+        const { courseId } = params
         const course = await courseInstance.findById(courseId);
         return NextResponse.json(course)
     }

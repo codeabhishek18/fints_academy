@@ -1,11 +1,22 @@
 import bcrypt from 'bcryptjs'
+// import jwt from 'jsonwebtoken'
+// import { Batch } from "@/models/batch.model.js";
+// import { Course } from "@/models/course.model.js";
+// import { Session } from "@/models/session.model.js";
+// import { Mentor } from "@/models/mentor.model.js";
+// import { Chat } from "@/models/chat.model.js";
+// import { Message } from "@/models/message.model.js";
+// import { Assessment } from '@/models/assessment.model.js';
+// import { Test } from '@/models/test.model.js';
+
 import { User } from "@/models/user.model";
 import { Enrollment } from '@/models/enrollment.model';
 import { Batch } from '@/models/batch.model';
+import { Course } from '@/models/course.model';
 import { Test } from '@/models/test.model';
 import { Chat } from '@/models/chat.model';
 import { Message } from '@/models/message.model';
-import { Course } from '@/models/course.model';
+import { Trigger } from '@/models/trigger.model';
 
 class userService 
 {
@@ -19,22 +30,7 @@ class userService
         }
         catch(error)
         {
-            return error;
-        }
-    }
-
-    async updateProfile(userId, updates)
-    {
-        try
-        {
-            console.log(updates)
-            await User.findByIdAndUpdate(userId, {$set: updates});
-            return
-        }
-        catch(error)
-        {
-            console.log(error)
-            throw error
+            throw error;
         }
     }
 
@@ -47,7 +43,6 @@ class userService
         }
         catch(error)
         {
-            console.log('error', error)
             throw error;
         }
     }
@@ -65,7 +60,7 @@ class userService
         }
     }
 
-    async updatEnrollment(userId, enrollmentId)
+    async updateEnrollment(userId, enrollmentId)
     {
         try
         {
@@ -73,7 +68,7 @@ class userService
         }
         catch(error)
         {
-            return error;
+            throw error;
         }
     }
 
@@ -81,12 +76,24 @@ class userService
     {
         try
         {
-            const users = await User.find().select('-password -googleId');
+            const users = await User.find({}).select('-password -googleId');
             return users;
         }
         catch(error)
         {
-            return error
+            throw error
+        }
+    }
+
+    async updateUserName(userId, name)
+    {
+        try
+        {
+            return await User.findByIdAndUpdate(userId, {$set : {name}})
+        }
+        catch(error)
+        {
+            throw error
         }
     }
 
@@ -94,6 +101,7 @@ class userService
     {
         try
         {
+            
             const user = await User.findById(id)
             .populate(
             [{
@@ -110,12 +118,16 @@ class userService
                     }
                 },
                 {
+                    path: 'simulation',
+                    model: Trigger,
+                },
+                {
                     path: 'assessments',
                     model: Test
                 }]
             },
             {
-                path: 'chat',
+                path: 'chats',
                 model: Chat,
                 populate:
                 [
@@ -151,19 +163,6 @@ class userService
     {
         const response = await bcrypt.compare(userPassword, dbPassword)
         return response
-    }
-
-    async updateOTP(userId, otp)
-    {
-        try
-        {
-            await User.findByIdAndUpdate(userId, {$set: {otp}});
-            
-        }
-        catch(error)
-        {
-            throw error
-        }
     }
 
     async updateChat(userId, chatId)

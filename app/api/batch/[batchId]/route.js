@@ -9,26 +9,9 @@ export async function GET(req, {params})
     {
         await dbConnect();
 
-        const {batchId} = await params;
+        const {batchId} = params;
         const batch = await batchInstance.findById(batchId);
         return NextResponse.json(batch)
-    }
-    catch(error)
-    {
-        return NextResponse.json({error: error.message})
-    }
-}
-
-export async function PUT(req, {params})
-{
-    try
-    {
-        await dbConnect();
-
-        const {batchId} = params;
-        const {access} = await req.json();
-        await batchInstance.updateBatchAccess(batchId, access);
-        return NextResponse.json({message: access === 'true' ? 'Batch Access Granted' : 'Batch Access Revoked'})
     }
     catch(error)
     {
@@ -44,7 +27,7 @@ export async function DELETE(req, {params})
 
         const {batchId} = params;
         await batchInstance.deleteById(batchId);
-        return NextResponse.json({message: 'deleted'})
+        return NextResponse.json({message: 'Batch deleted'})
     }
     catch(error)
     {

@@ -9,7 +9,7 @@ const Rating = ({value}) =>
         <div className='flex items-center gap-1'>
         {ratings.map((_,index)=>
         (
-            <Image className='h-6 w-6' src={star} alt='icon' key={index}/>
+            <Image className='h-5 w-5' src={star} alt='icon' key={index}/>
         ))}
         </div>
     )

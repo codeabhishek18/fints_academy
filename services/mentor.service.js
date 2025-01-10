@@ -11,8 +11,7 @@ class mentorService
         }
         catch(error)
         {
-
-            throw error
+            throw new Error(error.message)
         }
     }
 

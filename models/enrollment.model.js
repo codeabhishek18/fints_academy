@@ -16,12 +16,11 @@ const enrollmentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Test'
     }],
-    access:
-    {
-        type: String,
-        enum: [true, false],
-        default : true
-    }
+    simulation:
+    [{
+        type: Schema.Types.ObjectId,
+        ref: 'TriggerResponse'
+    }]
 })
 
 export const Enrollment = mongoose.models?.Enrollment || mongoose.model('Enrollment', enrollmentSchema)

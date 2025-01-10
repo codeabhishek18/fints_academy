@@ -1,5 +1,5 @@
 
-import material from '@/assets/material.png'
+import agenda from '@/assets/agenda.png'
 import complete from '@/assets/success-icon.png'
 import pending from '@/assets/pending.png'
 import Image from 'next/image'
@@ -22,13 +22,13 @@ const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActi
     }
 
     return(
-        <Card className='flex justify-between rounded items-center text-sm md:text-base p-4'>
+        <Card className='flex justify-between items-center text-sm p-4'>
             <div className='flex items-center gap-2'>
                 <TooltipProvider>
                 <Tooltip>
-                    <TooltipTrigger><Image className='h-6 w-fit' src={material} alt='agenda'/></TooltipTrigger>
+                    <TooltipTrigger><Image className='h-5 w-fit' src={agenda} alt='agenda'/></TooltipTrigger>
                     <TooltipContent>
-                        <p>{session.lecture.title}</p>
+                        <p>{session.description}</p>
                     </TooltipContent>
                 </Tooltip>
                 </TooltipProvider>
@@ -42,8 +42,7 @@ const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActi
                 <Label>{session.status}</Label>
             </div> : 
             <div className='flex items-center'>
-                <p>{session.status}</p>
-                <Image className='h-6 w-fit' src={session.status === 'Upcoming' ? pending : complete} alt='img'/>
+                <p className='text-muted-foreground'>{session.status}</p>
             </div>}
         </Card>
     )

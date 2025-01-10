@@ -16,7 +16,7 @@ const GoogleAuth = () =>
 
     return(
         <div className='flex justify-center gap-4 w-full' onClick={handleClick}> 
-            <Button className='min-w-full'><Image className='h-4 w-fit' src={google} alt='google' />Sign in with Google</Button>
+            <Button className='min-w-full h-10 sm:text-sm text-xs'><Image className='h-4 w-fit' src={google} alt='google' />Sign in with Google</Button>
         </div>
     )
 }

@@ -31,7 +31,12 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
-    batches: 
+    level:
+    {
+        type: String,
+        required: true
+    },
+    batches:
     [{
         type: Schema.Types.ObjectId,
         ref: 'Batch'
@@ -41,6 +46,11 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Lecture'
     }],
+    simulation:
+    [{
+        type: Schema.Types.ObjectId,
+        ref: 'Trigger'
+    }],
     feedbacks:
     [{
         type: Schema.Types.ObjectId,
@@ -48,4 +58,4 @@ const courseSchema = new Schema({
     }]
 },{timestamps: true})
 
-export const Course = mongoose.models?.Course || mongoose.model('Course', courseSchema);; 
+export const Course = mongoose.models?.Course || mongoose.model('Course', courseSchema);

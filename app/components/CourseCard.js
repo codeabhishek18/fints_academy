@@ -30,32 +30,18 @@ const CourseCard = ({level, course}) =>
 {
 
     return(
-    <div className='bg-white rounded shadow-xl'>
-        <Link href={level === 'admin' ? `/admin/courses/${course.id}` : `/courses/${course.id}`} className='relative text-sm md:text-base'>
-            <div className='flex flex-col gap-4 p-4'>
-            <div className='flex flex-col items-center justify-center h-48 rounded' style={{backgroundColor: 'var(--primary-color)'}}>
-                <Image className='object-scale-down h-[70%]' src={course.imageURL} alt={course.id} width={150} height={150}/>
-            </div>
-            {/* {level !== 'admin' && <BorderBeam colorFrom='var(--primary-color)' colorTo='var(--action-color)' className='rounded-xl'/>} */}
-            
-            <p className='md:text-lg text-base font-semibold' >{course.title}</p> 
-            
-            {/* <p className='md:text-3xl text-2xl text-center w-full font-bold'>${course.price}</p> */}
-            {level !== 'admin' && 
-            <div className='flex flex-col gap-2'>
-            
-                {extraData.map((data)=>
-                (
-                    <div key={data.id} className='flex gap-2 items-center text-sm'>
-                        <Image className='h-5 w-fit' src={verified} alt='icon'/>
-                        <p>{data.description}</p>
-                    </div>
-                ))}
-                <p className='text-gray-400 mt-2 text-sm'>32 lectures, 64 hours</p>
-            </div>}
-            </div>
-        </Link>
-    </div>
+        <Link href={`/courses/${course.id}`} key={course._id} className='space-y-2 bg-black border border-gray-800 rounded-xl p-4'>
+        <div className='relative h-40'>
+          <Image className='rounded w-[100%] object-cover' src={course.imageURL} layout='fill' alt={course.title}/>
+        </div>
+        
+        <h1 className='font-semibold'>{course.title}</h1>
+        <span className='bg-gray-400 text-black text-xs py-0.5 px-2 rounded-xl'>{course.level}</span>
+        <div className='flex items-center gap-2'>
+        <p>${course.offerPrice}</p>
+        <p className='line-through text-xs'>${course.price}</p>
+        </div>
+      </Link>
     )
 }
 

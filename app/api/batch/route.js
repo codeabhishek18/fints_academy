@@ -14,21 +14,19 @@ export async function POST(req, {params})
         await dbConnect();
 
         const { title, courseId, mentor, startDate, endDate } = await req.json(); 
-        console.log(title, courseId, mentor, startDate, endDate)
 
         const newBatch = await batchInstance.addNewBatch(title, courseId, mentor, startDate, endDate);
+        await courseInstance.addBatchToCourse(courseId, newBatch._id.toString());
         const course = await courseInstance.getByCourseId(courseId);
-
-        console.log(course);
 
         let id=1;
         for(let lecture of course.lectures)
         {
-            const batchSession = await sessionInstance.addNewSession(id, lecture._id)
+            const batchSession = await sessionInstance.addNewSession(id, lecture.description, lecture.duration)
             await batchInstance.updateSessions(newBatch._id, batchSession._id);
             id++;
         }
-        return NextResponse.json({message: 'Batch added'})
+        return NextResponse.json({message: 'Batch created'})
     }
     catch(error)
     {
@@ -43,7 +41,6 @@ export async function GET(req, res)
         await dbConnect();
 
         const batches = await batchInstance.getAllBatches();
-        console.log(batches)
         return NextResponse.json(batches)
     }
     catch(error)

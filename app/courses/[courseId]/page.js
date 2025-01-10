@@ -9,6 +9,7 @@ import Loading from '@/app/components/Loading';
 import CourseDetail from '@/app/components/CourseDetail';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { Slash } from "lucide-react"
+import Image from 'next/image';
 
 const Course = () =>
 {
@@ -44,8 +45,10 @@ const Course = () =>
         return <Loading/>
 
     return(
-        <div className='mt-12'>
+        <div className='mt-12 relative'>
             <Header/>
+            <Image className='object-cover h-fit' src='https://images.unsplash.com/photo-1637946175491-53bca31c90ba?q=80&w=2160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='FINTS AML' layout='fill' priority={true} />
+                          
             <div className='flex flex-col gap-4 lg:px-[10vw] px-[5vw] py-12'>
             <Breadcrumb>
                 <BreadcrumbList>
@@ -66,12 +69,12 @@ const Course = () =>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <div>
+            <div className='z-10'>
                 <CourseDetail course={course} level='visitor'/>
             </div>
+            
             </div>
             
-            <Footer/>
         </div>
     )
     

@@ -4,6 +4,7 @@ import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model";
 import { Group } from "@/models/group.model";
 import { Quiz } from "@/models/quiz.model";
+import { Test } from "@/models/test.model";
 
 class quizService
 {
@@ -25,9 +26,19 @@ class quizService
         try
         {
             const quizzes = await Quiz.find()
+            .populate({path: 'course', model: Course})
             .populate({
-                path: 'course',
-                model: Course
+                path: 'groups',
+                model: Group,
+                populate:
+                [{
+                    path: 'batch',
+                    model: Batch,
+                },
+                {
+                    path: 'tests',
+                    model: Test
+                }]
             })
             
             return quizzes
@@ -44,7 +55,7 @@ class quizService
         {
             const quiz = await Quiz.findById(id)
             .populate({
-                path: 'group',
+                path: 'groups',
                 model: Group,
                 populate:
                 [{
@@ -57,8 +68,8 @@ class quizService
                     }
                 },
                 {
-                    path: 'assignment',
-                    model: Assignment
+                    path: 'tests',
+                    model: Test
                 }]
             })
             return quiz
@@ -75,7 +86,7 @@ class quizService
         {
             const quiz = await Quiz.findOne({title: id})
             .populate({
-                path: 'group',
+                path: 'groups',
                 model: Group,
                 populate:
                 [{
@@ -88,8 +99,8 @@ class quizService
                     }
                 },
                 {
-                    path: 'assignment',
-                    model: Assignment
+                    path: 'tests',
+                    model: Test
                 }]
             })
             return quiz
@@ -123,7 +134,7 @@ class quizService
     {
         try
         {
-            return await Quiz.findByIdAndUpdate(quizId, {$push: {'group': group}});
+            return await Quiz.findByIdAndUpdate(quizId, {$push: {groups: group}});
         }
         catch(error)
         {

@@ -1,17 +1,15 @@
 import { Batch } from "@/models/batch.model";
-import { Course } from "@/models/course.model";
-import { Enrollment } from "@/models/enrollment.model";
-import { Feedback } from "@/models/feedback.model";
+import { Course } from "@/models/course.model.js";
 import { Lecture } from "@/models/lecture.model";
-import { User } from "@/models/user.model";
+import { Simulation, Trigger } from "@/models/trigger.model";
 
 class courseService
 {
-    async create(id, title, description, price, offerPrice, imageURL)
+    async create(id, title, description, price, offerPrice, imageURL, level)
     {
         try
         {
-            const newCourse = await Course.create({id, title, description, price, offerPrice, imageURL})
+            const newCourse = await Course.create({id, title, description, price, offerPrice, imageURL, level})
             if(!newCourse)
                 throw new Error('Failed to create new course')
             return await newCourse.save();
@@ -26,9 +24,7 @@ class courseService
     {
         try
         {
-            const courses = await Course.find({}).populate({path: 'lectures', model: Lecture});
-            if(!courses)
-                throw new Error('Courses not found')
+            const courses = await Course.find().populate({path: 'lectures', model: Lecture});
             return courses
         }
         catch(error)
@@ -41,9 +37,9 @@ class courseService
     {
         try
         {
-            const course = await Course.findById(id).populate({path: 'lectures', model: Lecture})
-            if(!course)
-                throw new Error('Course not found')
+            const course = await Course.findById(id)
+            .populate({path: 'lectures', model: Lecture})
+            .populate({path: 'simulation', model: Trigger})
             return course
         }
         catch(error)
@@ -58,10 +54,8 @@ class courseService
         {
             const course = await Course.findOne({id})
             .populate({path: 'lectures', model: Lecture})
-            .populate({path: 'batches', model: Batch, populate: {path: 'enrollments', model: Enrollment}})
-            .populate({path:'feedbacks',  model:Feedback, populate: {path: 'user', model:User}})
-            if(!course)
-                throw new Error('Course not found')
+            .populate({path: 'batches', model: Batch})
+            .populate({path: 'simulation', model: Trigger})
             return course
         }
         catch(error)
@@ -74,7 +68,33 @@ class courseService
     {
         try
         {
-            return await Course.findOneAndUpdate({id: courseId}, {$push: {lectures: lectureId}})
+            return await Course.findByIdAndUpdate(courseId, {$push: {lectures: lectureId}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async addTriggersToCourse(courseId, triggerId)
+    {
+        try
+        {
+            console.log(courseId, triggerId);
+            return await Course.findByIdAndUpdate(courseId, {$push: {simulation: triggerId}})
+        }
+        catch(error)
+        {
+            console.log(error)
+            throw error
+        }
+    }
+
+    async addBatchToCourse(courseId, batchId)
+    {
+        try
+        {
+            return await Course.findByIdAndUpdate(courseId, {$push: {batches: batchId}})
         }
         catch(error)
         {

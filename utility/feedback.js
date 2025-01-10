@@ -1,86 +1,74 @@
 export const Feedback = [
     {
         id: 1,
-        name: 'Ravi kumar',
+        name: 'Muganwa Pacifique',
         rating: 5,
-        comment: 'An immense knowledge about the subject. Marvelous training attitude. The best in the industry so far'
+        comment: 'The course is well presented and also provide hands on experience that help the participants to enhance the knowledge'
     },
     {
         id: 2,
-        name: 'Monica',
+        name: 'Aiswarya Rahesh',
         rating: 5,
-        comment: 'I got confidence and strong understanding of concepts, which helped me to score 90%. He is my go to trainer for all the certifications.'
+        comment: 'Classes were really helpful in my transaction monitoring journey. Live activities helps to capture the content effectively'
     },
     {
         id: 3,
-        name: 'Rafik Farooque Lulania',
+        name: 'Tanzid Ahmad',
         rating: 5,
-        comment: 'I am grateful to have achieved this milestone of understanding and gaining indepth knowledge of compliance and clearing ACAMS exam.'
+        comment: 'I feel more confident in my ability to identify and respond to suspicious activities now. I highly recommend this to others'
     },
     {
         id: 4,
-        name: 'Garima Gupta',
+        name: 'Anju Babu',
         rating: 5,
-        comment: 'Clear understanding of concepts. Adoptive teaching methodology as per individuals need'
+        comment: 'Highly appreciated Mr. Lokesh for conducting a fruitful short term complinace training. I strongly recommend this tonew learners'
     },
     {
         id: 5,
-        name: 'Tanu',
+        name: 'Iyappan Hariharan',
         rating: 5,
-        comment: 'Good. I strongly recommend this training for those who are looking forward to it'
+        comment: 'The course provides end to end knowledge on Sanctions. The simulations gives practical knowledge on screening.'
     },
     {
         id: 6,
-        name: 'Dipti Amin',
+        name: 'Mohammad Sorwar Alam',
         rating: 5,
-        comment: 'Exceptional mentor. His ability to connect with each creates a supportive learning environment. Forever grateful for his unwavering support during CAMS journey'
+        comment: 'I found the training to be informative and beneficial. Thank you Lokesh for your efforts in equipping us with the necessary skills'
     },
     {
         id: 7,
-        name: 'Joginder Singh',
+        name: 'Surekha Vana Murthi',
         rating: 5,
-        comment: 'It was wonderful and knowledgeable session with Lokesh,got to know lot of insights about AML/KYC world'
+        comment: 'Very informative session. I got an idea and practical knowledge on how cases are investigated within banks'
     },
     {
         id: 8,
-        name: 'Madivalayya Hiremath',
+        name: 'Vijay Kumar',
         rating: 5,
-        comment: 'Extremely skilled SME, having trained more than 1500 people till date, his track record 100% clearance speaks for itself. I strongly recommend this'
+        comment: 'Training is very interactive and interesting. I urge and suggest to undergo this training to ups-kill your career in AML/KYC'
     },
     {
         id: 9,
-        name: 'Vinod Singh Shekhawat',
+        name: 'Adnan Ustadi',
         rating: 5,
-        comment: 'Provides the guidance and support needed to help us stay focused and motivated. His commitment to our success is truly commendable.'
+        comment: 'Lokesh made Transaction Monitoring easy with his clear teaching and practical examples. Great work by him and the FINTS team!'
     },
     {
         id: 10,
-        name: 'Umesh',
-        rating: 4,
-        comment: 'Good'
+        name: 'Anas Anjukandy Thalakkal',
+        rating: 5,
+        comment: 'An excellent course by Mr. Lokesh! Clear teaching and practical examples made Transaction Monitoring easy to understand and apply'
     },
     {
         id: 11,
-        name: 'Soumyashree Panda',
+        name: 'Muhammad Mansoor',
         rating: 5,
-        comment: 'I have been associated with Lokesh for past 8 years. I have worked and been coached by him. I am yet to come across a person who is so uptodate and dynamic in AML space'
+        comment: 'Completed a course with FINTS. Very informative and professional, with excellent explanations from Mr. Lokesh. Highly recommended!'
     },
     {
         id: 12,
-        name: 'Shinu Purushothaman',
+        name: 'Ajith Chandran',
         rating: 5,
-        comment: 'Incredibly grateful for the guidance and expertise during ACAMS training. Deep knowledge, clear explanations, and real-world insights made complex topics Engaging'
-    },
-    {
-        id: 13,
-        name: 'Rasheeda Samsudeen',
-        rating: 5,
-        comment: 'Excellent'
-    },
-    {
-        id: 14,
-        name: 'Vinod Karade',
-        rating: 5,
-        comment: "I highly recommend Lokesh as a trainer for his ability to connect with trainees, clear instruction and enthusiasm make learning both engaging and effective." 
+        comment: 'he session was incredibly valuable, providing in-depth insights, practical knowledge, and clear guidance. Greatly enhanced my understanding'
     },
 ]

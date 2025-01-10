@@ -12,7 +12,7 @@ export async function POST(req, {params})
         const {batchId} = params;
         const {link} = await req.json();
         await batchInstance.updateWhatsappLink(batchId, link)
-        return NextResponse.json({message : 'Whatsapp link updated'})
+        return NextResponse.json({message : 'Updated'})
     }
     catch(error)
     {

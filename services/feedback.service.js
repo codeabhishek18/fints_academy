@@ -22,7 +22,7 @@ class feedbackService
     {
         try
         {
-            const feedbacks = await Feedback.find({}).populate({ path: 'user', model: User }) 
+            const feedbacks = await Feedback.find({}).populate({path:'user', model:User})
             return feedbacks
         }
         catch(error)
